@@ -1,57 +1,13 @@
 const Discord = require('discord.js');
 require('dotenv').config();
 const mongoose = require('mongoose')
+const eventModel = require("../DiscordBotJs/models/eventSchema")
 
 const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES"] });
 
 client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`);
 })
-
-// client.on("message", message => {
-//   if (message.content.startsWith === "$e"){
-//     message.channel.send("asdf");
-//     let contents = message.content.split(" ");
-//     try {
-//       var eventLink = await handleCreateEvent(contents, message);
-//     } catch(error){
-//       var eventLink = error;
-//     }
-//   }
-// })
-
-// async function handleCreateEvent(contents, messageObj) {
-//   eventObject = {
-//       date: "",
-//       time: "",
-//       endtime: "",
-//       name: ""
-//   }
-
-//   contents.forEach(string => {      
-//       if(string.startsWith("name:")) {
-//           eventObject.name = string.substring(5);
-//       }
-
-//       if(string.startsWith("date:")) {
-//           eventObject.date = string.substring(5);
-//       }
-
-//       if(string.startsWith("time:")) {
-//           let timePM = string.substring(5);
-//           let timeConverted = convertTime(timePM)
-
-//           eventObject.time = timeConverted
-//       }
-
-//       if(string.startsWith("endtime:")) {
-//           let timePM = string.substring(8);
-//           let timeConverted = convertTime(timePM)
-          
-//           eventObject.endtime = timeConverted
-//       }
-//   });
-// }
 
 client.on("message", msg => {
   if (msg.content === "$Hello"){
@@ -60,12 +16,13 @@ client.on("message", msg => {
 })
 
 const fs = require('fs');
+const { profile } = require('console');
 const prefix = "$";
 var eventPath = 'D:/VSCodeProjects/DiscordBotJs/events.json';
 var eventRead = fs.readFileSync(eventPath);
 var eventFile = JSON.parse(eventRead);
 
-function CreateEvent(contents, messageObj){
+function CreateEvent(contents, _msg){
   eventObject = {
     date: "",
     course: "",
@@ -118,9 +75,22 @@ function CreateEvent(contents, messageObj){
   var eventContents = eventObject.date + "\t " + eventObject.course + "\t " + eventObject.group + "\t " + eventObject.hour + "\t " + eventObject.inf;
 
   try {
+    module.exports = async (_Discord, _client, msg) =>{
+      let event = await new eventModel.create({
+        serverID: msg.guild.id,
+        date: eventObject.date,
+        course: eventObject.course,
+        group: eventObject.group,
+        hour: eventObject.hour,
+        information: eventObject.inf
+      });
+      event.save();
+      console.log("test");
+    }
+    
     return eventContents;
-  } catch(error){
-    return error;
+  } catch(err){
+    return err;
   }
 }
 
@@ -134,40 +104,28 @@ client.on("message", msg => {
   const args = msg.content.slice(prefix.length).trim().split(/ +/g);
   const command = args.shift().toLowerCase();
 
-  
   if (command === "e"){
     try{
+      module.exports = async (Discord, client, msg) =>{
+        let event = await new eventModel.insertOne({
+          date: "01.02.2021",
+          course: "Analiza Matematyczna",
+          group: "XD-01",
+          hour: "11:15",
+          information: "trzeba wejsc na zooma"
+        });
+        event.save();
+        console.log("tak");
+      }
       var eventLink = CreateEvent(contents, msg);
-    } catch(error){
-      var eventLink = error;
+    } catch(err){
+      var eventLink = err;
     }
 
     msg.channel.send("```\tDate\t\t\tCourse\t\t\tGroup\t\t\tHour\t\t\tAdditional Information```");
     msg.channel.send(`\`\`\`${eventLink}\`\`\``);
       
-    // let data = "";
-    // for (let index = 0; index < args.length; index++) {
-    //   data += args[index] + " ";
-    // }
-    // let dataArray = [4];
-    // let char = "";
-    // for (let index = 0; index < data.length; index++) {
-    //   char = data.charAt(index);
-    //   if (char === '"'){
-        
-    //   }
-    // }
-    // msg.channel.send(data);
-    // let date = args[0];
-    // let course = args[1];
-    // let group = args[2];
-    // let hour = args[3];
-    // let inf = args[4];
-    //msg.channel.send(`\`\`\`${date} ${course} ${group} ${hour} ${inf}\`\`\``);
   }
-  // var userId = msg.author.id;
-  // eventFile[userId] = {date: 0, course: "", group: "", hour: 0, inf: ""};
-  // fs.writeFileSync(eventPath, JSON.stringify(eventFile, null, 2));
 })
 
 mongoose
