@@ -75,7 +75,7 @@ function CreateEvent(contents, _msg){
   var eventContents = eventObject.date + "\t " + eventObject.course + "\t " + eventObject.group + "\t " + eventObject.hour + "\t " + eventObject.inf;
 
   try {
-    module.exports = async (_Discord, _client, msg) =>{
+    module.exports = async (_Discord, _client, msg) =>{ //doesnt work, gotta find out why 
       let event = await new eventModel.create({
         serverID: msg.guild.id,
         date: eventObject.date,
@@ -106,17 +106,17 @@ client.on("message", msg => {
 
   if (command === "e"){
     try{
-      module.exports = async (Discord, client, msg) =>{
-        let event = await new eventModel.insertOne({
-          date: "01.02.2021",
-          course: "Analiza Matematyczna",
-          group: "XD-01",
-          hour: "11:15",
-          information: "trzeba wejsc na zooma"
-        });
-        event.save();
-        console.log("tak");
-      }
+      // module.exports = async (Discord, client, msg) =>{
+      //   let event = await new eventModel.insertOne({
+      //     date: "01.02.2021",
+      //     course: "Analiza Matematyczna",
+      //     group: "XD-01",
+      //     hour: "11:15",
+      //     information: "trzeba wejsc na zooma"
+      //   });
+      //   event.save();
+      //   console.log("tak");
+      // }
       var eventLink = CreateEvent(contents, msg);
     } catch(err){
       var eventLink = err;
