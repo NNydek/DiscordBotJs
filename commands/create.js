@@ -11,7 +11,7 @@ module.exports = {
       `Not enough parameters! Try: ${correctMessage}`);
     let contents = message.content.split(" ");
     if(check_message(contents) === false) return message.reply(
-      `Looks like you've misspelled or missed some of the information. Try: ${correctMessage}`);
+      `Looks like you've misspelled or missed some of the information. Check again or try: ${correctMessage}`);
     try{
       var eventLink = create_event(contents);
       let event = await eventModel.create({
