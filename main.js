@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 require('dotenv').config();
 const mongoose = require('mongoose')
 const eventModel = require("./models/eventSchema")
-const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES"] });
+const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES" , "GUILD_VOICE_STATES"] });
 
 client.commands = new Discord.Collection();
 client.events = new Discord.Collection();
