@@ -5,6 +5,7 @@ A node based discord bot made to facilitate college life. Works like a calendar 
 | Command | Description |
 | --- | --- |
 | $c, $create \<PARAMETERS\> | Creates new event |
+| $p, $play \<SONG\> | Plays music through youtube search |
 * Parameters: `date`,`course`,`group`,`hour`,`inf`.
   * `date`: takes date in DD/MM/YYYY format.
   * `hour`: takes time in 24h format.
@@ -25,7 +26,6 @@ MONGODB_SRV=mongodb+srv://<username>:<password>@discordbot.uts0r.mongodb.net/myF
 ### #TODO
 ###### Music
 ```
-$p, $play     Plays desired song
 $skip         Skips currently playing song
 $search       Prints list of the most relevant songs
 ```
