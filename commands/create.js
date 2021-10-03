@@ -87,20 +87,15 @@ function check_message(contents){
   var dateBool, courseBool, groupBool, hourBool, infBool = false;
   contents.forEach(string => {
     switch(string){
-      case "date:":
-        dateBool = true;
+      case "date:": dateBool = true;
         break;
-      case "course:":
-        courseBool = true;
+      case "course:": courseBool = true;
         break;
-      case "group:":
-        groupBool = true;
+      case "group:": groupBool = true;
         break;
-      case "hour:":
-        hourBool = true;
+      case "hour:": hourBool = true;
         break;
-      case "inf:":
-        infBool = true;
+      case "inf:": infBool = true;
         break;
       default:
           break;
