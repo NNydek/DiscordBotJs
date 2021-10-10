@@ -5,7 +5,7 @@ module.exports = {
   aliases: ['c'],
   description: "Create new event",
   async execute(client, message, args, Discord){
-    let correctMessage = "\`\`\`$create date: DD/MM/YYYY course: Analiza Matematyczna group: XD-01 hour: 10:15 inf: Trzeba wejsc na zooma\`\`\`";
+    let correctMessage = "\`\`\`$c date: 2022/02/01 course: Applied Mathematics group: YB-01 hour: 10:15 inf: Bring your own calculator\`\`\`";
     if(!args[0]) return message.reply("No parameters given");
     if(args.length < 9) return message.reply(
       `Not enough parameters! Try: ${correctMessage}`);
@@ -27,7 +27,7 @@ module.exports = {
     } catch(err){
       return err;
     }
-    await message.channel.send("```\tDate\t\t\tCourse\t\t\tGroup\t\t\tHour\t\t\tAdditional Information```");
+    await message.channel.send("Event created!");
     await message.channel.send(`\`\`\`${eventLink}\`\`\``);
   }
 }
@@ -73,8 +73,9 @@ function create_event(contents){
         eventObject.inf += string + " ";
     }
   });
-
-  var eventContents = eventObject.date + "\t " + eventObject.course + "\t " + eventObject.group + "\t " + eventObject.hour + "\t " + eventObject.inf;
+  eventObject.course = eventObject.course.trim();
+  eventObject.inf = eventObject.inf.trim();
+  var eventContents = `${eventObject.date} ${eventObject.course} ${eventObject.group} ${eventObject.hour} ${eventObject.inf}`;
   
   try {
     return eventContents;
