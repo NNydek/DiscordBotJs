@@ -6,10 +6,11 @@ A node based discord bot made to facilitate college life. Works like a calendar 
 | --- | --- |
 | $c, $create \<PARAMETERS\> | Creates new event |
 | $p, $play \<SONG\> | Plays music through youtube search |
+| $l, $ls, $list | Prints list of all events |
 * Parameters: `date`,`course`,`group`,`hour`,`inf`.
-  * `date`: takes date in DD/MM/YYYY format.
+  * `date`: takes date in YYYY/MM/DD format.
   * `hour`: takes time in 24h format.
-  * Example: `$c date: 01/02/2022 course: Applied Mathematics group: YB-01 hour: 10:15 inf: Bring your own calculator`
+  * Example: `$c date: 2022/02/01 course: Applied Mathematics group: YB-01 hour: 10:15 inf: Bring your own calculator`
   
 ### Prerequisites
 * Node.js, NPM
@@ -32,7 +33,6 @@ $search       Prints list of the most relevant songs
 ###### Calendar
 ```
 $del, $delete, $remove <EVENTID>     Deletes an event matching ID
-$l, $list                            Prints list of all events
 ```
 
 ###### Other
