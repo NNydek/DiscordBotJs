@@ -1,6 +1,5 @@
 const ytdl = require('ytdl-core');
 const ytSearch = require('yt-search');
-const config = require(`../config.json`);
 const { Player, RepeatMode } = require("discord-music-player");
 
 
